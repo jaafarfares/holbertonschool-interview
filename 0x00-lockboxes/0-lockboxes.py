@@ -2,21 +2,13 @@
 
 
 def canUnlockAll(boxes):
-  index = 0
-  total = list(set(boxes[0])| {0})
-  added = True
-  while added:
-    added = False
-    for j in join(boxes,total[index:]):
-      if j not in total:
-        total.append(j)
-        index +=1
-        added= True
-  
-  return len(total)==len(boxes)
-
-def join(T,R):
-  res =[]
-  for e in R:
-    res += T[e]
-  return res
+    unlocked = [0]
+    for box_id, box in enumerate(boxes):
+        if not box:
+            continue
+        for key in box:
+            if key < len(boxes) and key not in unlocked and key != box_id:
+                unlocked.append(key)
+    if len(unlocked) == len(boxes):
+        return True
+    return False
