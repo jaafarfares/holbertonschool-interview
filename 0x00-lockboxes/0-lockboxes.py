@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 def canUnlockAll(boxes):
+    """ this is my class """
     unlocked = [0]
     for box_i, value in enumerate(boxes):
         if not value:
