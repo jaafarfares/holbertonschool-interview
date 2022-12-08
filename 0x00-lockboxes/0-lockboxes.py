@@ -1,10 +1,5 @@
 #!/usr/bin/python3
 
-def join(T,R):
-  res =[]
-  for e in R:
-    res += T[e]
-  return res
 
 def canUnlockAll(boxes):
   index = 0
@@ -19,3 +14,9 @@ def canUnlockAll(boxes):
         added= True
   
   return len(total)==len(boxes)
+
+def join(T,R):
+  res =[]
+  for e in R:
+    res += T[e]
+  return res
