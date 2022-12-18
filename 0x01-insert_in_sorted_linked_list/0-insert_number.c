@@ -2,8 +2,13 @@
 #include <string.h>
 #include <stdio.h>
 #include "lists.h"
-
-
+/**
+* insert_node - ....
+*@head: ....
+*@number: ....
+*Return: always 0.
+*
+*/
 listint_t *insert_node(listint_t **head, int number)
 {
 	listint_t *new;
