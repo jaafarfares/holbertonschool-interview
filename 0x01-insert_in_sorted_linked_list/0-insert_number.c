@@ -36,8 +36,3 @@ listint_t *insert_node(listint_t **head, int number)
 	return (new);
 }
 
-/**
- * free_listint - frees a listint_t list
- * @head: pointer to list to be freed
- * Return: void
- */
