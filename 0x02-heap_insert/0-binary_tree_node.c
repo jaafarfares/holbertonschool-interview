@@ -19,7 +19,7 @@ binary_tree_t *binary_tree_node(binary_tree_t *parent, int value)
 	tmp->parent = parent;
 	return (tmp);
 
-	if (tmp == NULL)
+	if (tmp == NULL || parent == NULL)
 	{
 		return (NULL);
 	}
