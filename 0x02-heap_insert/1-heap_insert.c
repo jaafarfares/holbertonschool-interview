@@ -1,11 +1,7 @@
 #include <stdlib.h>
 #include "binary_trees.h"
 
-void swap(int *x, int *y){
-	int temp = *x;
-    *x = *y;
-    *y = temp;
-}
+
 
 /**
  * heap_insert - .....
@@ -24,4 +20,18 @@ heap_t *heap_insert(heap_t **root, int value)
     }
     
     
+}
+
+/**
+ * swap - .....
+ * @y: ....
+ * @x: ....
+ * Return: ....
+ *
+ */
+
+void swap(int *x, int *y){
+	int temp = *x;
+    *x = *y;
+    *y = temp;
 }
