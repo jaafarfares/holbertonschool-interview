@@ -33,3 +33,7 @@ Min number of operations to reach 9 characters: 6
 Min number of operations to reach 12 characters: 7
 carrie@ubuntu:~/0x03-minoperations$
 ```
+
+
+
+Made by * [Jaafar Fares](https://github.com/jaafarfares) for Holberton School
