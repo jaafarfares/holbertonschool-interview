@@ -1,6 +1,6 @@
 #                           Minimum Operations
 
-    function to count minimum operations to duplicate the character H
+    a Python function to count minimum operations to duplicate the character H
     till it reach the n number
 
 
