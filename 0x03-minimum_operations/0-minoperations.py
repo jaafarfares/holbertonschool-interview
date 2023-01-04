@@ -10,11 +10,9 @@ def minOperations(n):
     till it reach the n number
     """
 
-
     counter = 0
     i = 1
-    a = 0 
-    
+    a = 0
     while i < n:
         if n % i == 0:
             a = i
