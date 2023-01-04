@@ -11,6 +11,11 @@ def minOperations(n):
     """
     counter = 0
     i = 1
+    
+    if (n <= 0):
+        return 0
+    
+    
     while i < n:
         if (i % 2 != 0):
             a = i
@@ -26,14 +31,3 @@ def minOperations(n):
         else:
             return 0
     return counter
-    """         i = 0
-            a = 0
-            if( n % 2 != 0):
-                n = n + n
-                counter+=2
-            else:
-                n/=2
-            counter+=1
-            return counter
-        return 0
-        """
