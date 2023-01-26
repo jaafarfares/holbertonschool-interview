@@ -1,6 +1,6 @@
 # Welcome to holbertonschool-interview
 
-#### repository is a collection of projects and exercises that are designed to help students and professionals prepare for interviews in the field of software engineering.
+#### this repository is a collection of projects and exercises that are designed to help students and professionals prepare for interviews in the field of software engineering.
 
 ###### This repository is packed with a wide variety of programming languages and concepts, including C, Python, JavaScript, HTML, CSS, Bootstrap, jQuery and many more. The projects and exercises within this repository are designed to help you improve your skills and knowledge in software engineering, and gain practical experience with the technologies and techniques that are used in real-world projects.
 
