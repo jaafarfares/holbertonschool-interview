@@ -7,14 +7,14 @@ import datetime
 from collections import Counter
 
 
-form = "{:d}.{:d}.{:d}.{:d} - [{}] \"GET /projects/260 HTTP/1.1\" {} {}\n"
 counter = 0
 total_f_size = 0
-status_codes = Counter()
+status_codes = Counter({'200': 0, '301': 0, '400': 0,
+               '401': 0, '403': 0, '404': 0, '405': 0, '500': 0})
 try:
     for line in sys.stdin:
         try:
-            if line and form:
+            if line and status_codes:
                 counter += 1
                 f_size = int(line.split()[-1].strip())
                 s_code = line.split()[-2].strip()
@@ -23,20 +23,16 @@ try:
                 f_size = 0
                 if counter % 10 == 0:
                     print("File size: " + str(total_f_size))
-                    for key, num in sorted(status_codes.items()):
-                        if num != 0:
-                            print(str(key) + ": " + str(num))
-        except ValueError as e:
-            print(e)
-    if counter % 10 == 0:
-        print("File size: " + str(total_f_size))
-        for key, num in sorted(status_codes.items()):
-            if num != 0:
-                print(str(key) + ": " + str(num))
+                    for key in sorted(status_codes.keys()):
+                        print(key + ": " + str(status_codes[key]))
+        except KeyboardInterrupt:
+            if counter % 10 == 0:
+                print("File size: " + str(total_f_size))
+                for key in sorted(status_codes.keys()):
+                    print(key + ": " + str(status_codes[key]))
 except KeyboardInterrupt:
     if counter % 10 == 0:
         print("File size: " + str(total_f_size))
-        for key, num in sorted(status_codes.items()):
-            if num != 0:
-                print(str(key) + ": " + str(num))
+        for key in sorted(status_codes.keys()):
+            print(key + ": " + str(status_codes[key]))
     raise
