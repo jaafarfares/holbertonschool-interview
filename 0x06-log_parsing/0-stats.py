@@ -7,6 +7,8 @@ import datetime
 from collections import Counter
 
 
+if __name__ == "__main__":
+    """main function"""
 counter = 0
 total_f_size = 0
 status_codes = Counter({'200': 0, '301': 0, '400': 0,
