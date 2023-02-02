@@ -9,7 +9,7 @@
 
 
 
-#### a function in C that checks if a singly linked list has a cycle in it.he function should take in a pointer to the head node of the linked list and return 0 if there is no cycle and 1 if there is a cycle. The function should have an efficient runtime and low memory usage, 
+#### a function in C that checks if a singly linked list has a cycle in it. the function should take in a pointer to the head node of the linked list and return 0 if there is no cycle and 1 if there is a cycle. The function should have an efficient runtime and low memory usage, 
 
 
 
