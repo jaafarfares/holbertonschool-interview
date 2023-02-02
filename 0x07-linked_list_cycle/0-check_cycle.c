@@ -11,10 +11,10 @@
 
 int check_cycle(listint_t *list)
 {
-    if (list == NULL)
-        return 0;
+
     listint_t *ptr;
     ptr = list->next;
     while (ptr != NULL && ptr != list)
         return (1);
+    return 0;
 }
