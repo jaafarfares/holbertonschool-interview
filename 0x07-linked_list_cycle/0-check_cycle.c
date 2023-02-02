@@ -5,7 +5,7 @@
 
 /**
  * check_cycle - check the code for Holberton School students.
- *
+ *@list: .......
  * Return: Always 0.
  */
 
