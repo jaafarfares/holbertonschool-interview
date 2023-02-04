@@ -25,8 +25,6 @@ carrie@ubuntu:0x03$ ./palindrome
 1
 Linked list is a palindrome
 Jaafar@ubuntu:0x03$
-
-
 ```
 
 
