@@ -4,8 +4,8 @@
 
 /**
  * is_palindrome - function to check if the list is palinrome.
- * @head: pointer to the first node
- * Return: 1 if list is palindrom return 0 otherwise
+ * @head: ....
+ * Return: ....
  */
 
 int is_palindrome(listint_t **head)
@@ -13,6 +13,8 @@ int is_palindrome(listint_t **head)
 	listint_t *current = *head;
 	int len = 0;
 	int arr[1024];
+    if (*head == NULL)
+		return (1);
 
 	while (current != NULL)
 	{
