@@ -11,7 +11,7 @@ This function is designed to check if a linked list is a palindrome. The functio
 ### Usage
 
 ```
-carrie@ubuntu:0x03$ gcc -Wall -Werror -Wextra -pedantic 0-main.c linked_lists.c 0-is_palindrome.c -o palindrome
+Jaafar@ubuntu:0x03$ gcc -Wall -Werror -Wextra -pedantic 0-main.c linked_lists.c 0-is_palindrome.c -o palindrome
 carrie@ubuntu:0x03$ ./palindrome
 1
 17
@@ -26,3 +26,10 @@ carrie@ubuntu:0x03$ ./palindrome
 Linked list is a pali
 
 ```
+Jaafar@ubuntu:0x03$
+
+
+
+## Made by [Jaafar Fares](https://github.com/jaafarfares) for [Holberton School](https://www.holbertonschool.com/)
+
+
