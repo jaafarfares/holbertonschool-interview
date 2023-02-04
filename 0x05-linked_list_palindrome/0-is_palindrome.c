@@ -4,8 +4,8 @@
 
 /**
  * is_palindrome - function to check if the list is palinrome.
- * @head: ....
- * Return: ....
+ * @head: pointer to the first node
+ * Return: 1 if list is palindrom return 0 otherwise
  */
 
 int is_palindrome(listint_t **head)
