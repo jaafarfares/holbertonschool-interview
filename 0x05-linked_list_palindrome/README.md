@@ -10,7 +10,7 @@ This function is designed to check if a linked list is a palindrome. The functio
 
 ### Usage
 
-'''
+```
 carrie@ubuntu:0x03$ gcc -Wall -Werror -Wextra -pedantic 0-main.c linked_lists.c 0-is_palindrome.c -o palindrome
 carrie@ubuntu:0x03$ ./palindrome
 1
@@ -25,4 +25,4 @@ carrie@ubuntu:0x03$ ./palindrome
 1
 Linked list is a pali
 
-'''
+```
