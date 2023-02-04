@@ -1,12 +1,13 @@
-#include "lists.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "lists.h"
 
 /**
- * is_palindrome - function to check a linked list is a palindrome.
- *@head: ......
- * Return: int.
+ * is_palindrome - function to check if the list is palinrome.
+ * @head: ....
+ * Return: ....
  */
+
 int is_palindrome(listint_t **head)
 {
 	listint_t *current = *head;
