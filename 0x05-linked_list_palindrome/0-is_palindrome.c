@@ -3,10 +3,11 @@
 #include "lists.h"
 
 /**
- * is_palindrome - function to check if the list is palinrome.
- * @head: ....
- * Return: ....
+ * is_palindrome - function to check if the list is a palindrome.
+ * @head: Pointer to the head of the linked list.
+ * Return: 1 if the linked list is a palindrome, 0 otherwise.
  */
+
 int is_palindrome(listint_t **head)
 {
 	listint_t *current = *head, *sec = *head;
