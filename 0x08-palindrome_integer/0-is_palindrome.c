@@ -1,9 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 /**
- * is_palindrome - checks a given unsigned integer is a palindrome or not.
- * @n: is the number to be checked
- * Return: return 1 if n is a palindrome, and 0 otherwise
+ *is_palindrome - checks a given unsigned integer is a palindrome or not.
+ *@n: is the number to be checked
+ *Return: return 1 if n is a palindrome, and 0 otherwise
 */
 
 int is_palindrome(unsigned long n)
