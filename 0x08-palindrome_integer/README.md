@@ -66,3 +66,5 @@ Jaafar@~/0x08-palindrome_integer$ ./palindrome 1234567898654321
 Jaafar@~/0x08-palindrome_integer$
 
 ```
+
+## Made by [Jaafar Fares](https://github.com/jaafarfares) for [Holberton School](https://www.holbertonschool.com/)
