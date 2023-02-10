@@ -17,8 +17,5 @@ int is_palindrome(unsigned long n)
 		sum = (sum * 10) + r;
 		n = n / 10;
 	}
-	if (temp == sum)
-	return (1);
-	else
-	return (0);
+	return ((sum == temp) ? 1 : 0);
 }
