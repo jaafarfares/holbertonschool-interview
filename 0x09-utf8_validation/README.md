@@ -16,8 +16,6 @@ If all bytes are valid UTF-8 encodings, the function returns True. The implement
 Overall, the function implements the UTF-8 encoding validation algorithm and returns whether or not the input data represents a valid UTF-8 encoding.
 
 
-
-
 ## Usage:
 
 ```
