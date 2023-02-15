@@ -18,7 +18,7 @@ Overall, the function implements the UTF-8 encoding validation algorithm and ret
 
 
 
-# Usage
+## Usage:
 
 ```
 Jaafar@ubuntu:~/0x09-utf8_validation$ cat 0-main.py
