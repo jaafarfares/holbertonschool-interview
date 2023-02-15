@@ -39,7 +39,6 @@ data = [229, 65, 127, 256]
 print(validUTF8(data))
 ```
 
-####
 ```
 Jaafar@ubuntu:~/0x09-utf8_validation$
 Jaafar@ubuntu:~/0x09-utf8_validation$ ./0-main.py

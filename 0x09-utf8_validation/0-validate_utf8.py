@@ -3,6 +3,7 @@
 determines if a given data set represents a valid UTF-8 encoding
 """
 
+
 def validUTF8(data):
     """_summary_
     Return: True if data is a valid UTF-8 encoding,
@@ -17,7 +18,7 @@ def validUTF8(data):
             if num & (1 << i):
                 count += 1
             else:
-               break
+                break
         return count
     count = 0
     for a in data:
@@ -31,5 +32,4 @@ def validUTF8(data):
             count -= 1
             if countonce(a) != 1:
                 return False
-    return count == 0              
-                
+    return count == 0
