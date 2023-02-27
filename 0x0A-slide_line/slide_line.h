@@ -9,10 +9,7 @@
 #define SLIDE_LEFT 0
 #define SLIDE_RIGHT 
 
-static void print_array(int const *array, size_t size);
 int slide_line(int *line, size_t size, int direction);
-
-
 
 
 #endif
