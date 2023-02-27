@@ -11,8 +11,9 @@
 void slide_left(int *line, size_t size)
 {
 size_t write_idx = 0;
+size_t read_idx;
 
-for (size_t read_idx = 0; read_idx < size; read_idx++)
+for (read_idx = 0; read_idx < size; read_idx++)
 {
 if (line[read_idx] != 0)
 {
@@ -21,7 +22,8 @@ write_idx++;
 }
 }
 
-for (size_t i = write_idx; i < size; i++)
+size_t i;
+for (i = write_idx; i < size; i++)
 {
 line[i] = 0;
 }
