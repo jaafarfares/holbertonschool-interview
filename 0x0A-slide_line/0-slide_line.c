@@ -1,57 +1,109 @@
 #include "slide_line.h"
 
 /**
- * slide_line - .....
+ * slide_left - .....
  * @line: .......
  * @size: .....
- * @direction: .....
  * Return: ........
  */
-int slide_line(int *line, size_t size, int direction)
-{
-int i, j, k, tmp;
-int merged[size];
 
-if (direction != SLIDE_LEFT && direction != SLIDE_RIGHT)
-return (0);
 
-for (i = 0, j = 0; i < (int)size; i++)
+void slide_left(int *line, size_t size)
 {
-if (line[i] != 0)
+size_t write_idx = 0;
+
+for (size_t read_idx = 0; read_idx < size; read_idx++)
 {
-if (direction == SLIDE_RIGHT)
-merged[j++] = line[i];
-else
-merged[j--] = line[i];
+if (line[read_idx] != 0) {
+line[write_idx] = line[read_idx];
+write_idx++;
 }
 }
 
-for (i = 0, k = 0; i < j && k < (int)size; i++)
+for (size_t i = write_idx; i < size; i++)
 {
-if (merged[i] == merged[i + 1])
-{
-merged[k++] = merged[i] * 2;
-i++;
-}
-else
-merged[k++] = merged[i];
-}
-
-while (k < (int)size)
-merged[k++] = 0;
-
-if (direction == SLIDE_RIGHT)
-{
-for (i = 0; i < (int)size / 2; i++)
-{
-tmp = merged[i];
-merged[i] = merged[size - i - 1];
-merged[size - i - 1] = tmp;
+line[i] = 0;
 }
 }
 
-for (i = 0; i < (int)size; i++)
-line[i] = merged[i];
+/**
 
-return (1);
+* slide_right - .....
+* @line: .......
+* @size: .....
+* Return: ........
+*/
+void slide_right(int *line, size_t size)
+{
+size_t write_idx = size - 1;
+
+for (size_t read_idx = size - 1; (int)read_idx >= 0; read_idx--)
+{
+if (line[read_idx] != 0) {
+line[write_idx] = line[read_idx];
+write_idx--;
+}
+}
+
+for (size_t i = write_idx + 1; i > 0; i--)
+{
+line[i - 1] = 0;
+}
+}
+
+/**
+* merge_left - .....
+* @line: .......
+* @size: .....
+* Return: ........
+*/
+void merge_left(int *line, size_t size)
+{
+for (size_t i = 0; i < size - 1; i++)
+{
+if (line[i] != 0 && line[i] == line[i + 1]) {
+line[i] *= 2;
+line[i + 1] = 0;
+}
+}
+}
+/**
+
+* merge_right - .....
+* @line: .......
+* @size: .....
+* Return: ........
+*/
+void merge_right(int *line, size_t size)
+{
+for (size_t i = size - 1; (int)i > 0; i--)
+{
+if (line[i] != 0 && line[i] == line[i - 1]) {
+line[i] *= 2;
+line[i - 1] = 0;
+}
+}
+}
+/**
+
+* slide_line - .....
+* @line: .......
+* @size: .....
+* @direction: .....
+* Return: ........
+*/
+void slide_line(int *line, size_t size, int direction)
+{
+if (direction == SLIDE_LEFT)
+{
+slide_left(line, size);
+merge_left(line, size);
+slide_left(line, size);
+}
+else if (direction == SLIDE_RIGHT)
+{
+slide_right(line, size);
+merge_right(line, size);
+slide_right(line, size);
+}
 }
