@@ -1,5 +1,5 @@
-#ifndef MENGER_H_
-#define MENGER_H_
+#ifndef MENGER_H
+#define MENGER_H
 
 #include <stdio.h>
 #include <stdlib.h>
