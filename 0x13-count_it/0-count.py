@@ -1,52 +1,55 @@
-import praw
+#!/usr/bin/python3
 """
 Write a recursive function that queries the Reddit API, parses the i
 of all hot articles, and prints a sorted count of given keywords (case-
 insensitive, delimited by spaces. Javascript should count as javascript,
 but java should not). """
 
-reddit = praw.Reddit(
-    client_id='your_client_id',
-    client_secret='your_client_secret',
-    username='your_username',
-    password='your_password',
-    user_agent='your_user_agent')
+import requests
 
 
-def count_words(subreddit, word_list, word_count=None):
+def count_words(subreddit, word_list, word_count=None, after=None):
     """
-    count_words
+    prints a sorted count of given keywords
     """
-    if not word_count:
-        word_count = {}
 
-    try:
-        hot_posts = reddit.subreddit(subreddit).hot(limit=100)
-    except BaseException:
-        print("invalid subreddit")
+    if word_count is None:
+        word_count = {word.lower(): 0 for word in word_list}
+
+    if after is None:
+        sorted_word_count = dict(sorted(
+            word_count.items(),
+            key=lambda x: (-x[1], x[0])
+        ))
+        for k, v in sorted_word_count.items():
+            if v > 0:
+                print("{}: {}".format(k, v))
         return
 
-    for post in hot_posts:
-        i = post.i.lower()
+    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
+    headers = {'User-agent': 'counting-app'}
+    params = {'limit': 100}
+    if after:
+        params['after'] = after
 
-        for word in word_list:
-            w_l = word.lower()
+    response = requests.get(url, headers=headers, params=params)
 
-            if (w_l in i and
-                    not any(char.isalpha() for char in i[i.find(w_l) - 1:i.find(w_l)]) and
-                    not any(char.isalpha() for char in i[i.find(w_l) + len(w_l):i.find(w_l) + len(w_l) + 1])):
+    if response.status_code == 200:
+        data = response.json()['data']
+        after = data['after']
+        for child in data['children']:
+            title = child['data']['title'].lower()
+            title_words = [word.strip('.,?!()') for word in title.split()]
+            for word in word_list:
+                if word.lower() in title_words:
+                    word_count[word.lower()] += 1
 
-                if w_l in word_count:
-                    word_count[w_l] += i.count(w_l)
-                else:
-                    word_count[w_l] = i.count(w_l)
-
-    if not word_count:
+        count_words(subreddit, word_list, word_count, after)
+    else:
+        print("Error: Request failed with status code", response.status_code)
         return
 
-    sorted_count = sorted(word_count.items(), key=lambda x: (-x[1], x[0]))
 
-    for word, count in sorted_count:
-        print(word + ": " + str(count))
 
-    return word_count
+
+
