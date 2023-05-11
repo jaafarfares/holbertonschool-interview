@@ -8,47 +8,43 @@ but java should not). """
 import requests
 
 
-def count_words(subreddit, word_list, word_count=None, after=None):
+def count_words(subreddit, word_list, word_count={}, after=""):
     """
     prints a sorted count of given keywords
     """
-
-    if word_count is None:
-        word_count = {word.lower(): 0 for word in word_list}
+    if len(word_count) <= 0:
+        for word in word_list:
+            word_count[word.lower()] = 0
 
     if after is None:
         sorted_word_count = dict(sorted(
             word_count.items(),
-            key=lambda x: (-x[1], x[0])
-        ))
+            key=lambda x: (x[1], x[0]),
+            reverse=True
+            ))
         for k, v in sorted_word_count.items():
             if v > 0:
                 print("{}: {}".format(k, v))
-        return
+        return None
 
-    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
-    headers = {'User-agent': 'counting-app'}
-    params = {'limit': 100}
-    if after:
-        params['after'] = after
-
-    response = requests.get(url, headers=headers, params=params)
+    url = "https://api.reddit.com/r/{}/hot".format(subreddit)
+    params = {'limit': 100, 'after': after}
+    headers = {'user-agent': 'counting-app'}
+    response = requests.get(url, headers=headers,
+                            params=params, allow_redirects=False)
 
     if response.status_code == 200:
-        data = response.json()['data']
-        after = data['after']
-        for child in data['children']:
-            title = child['data']['title'].lower()
-            title_words = [word.strip('.,?!()') for word in title.split()]
+        after = response.json().get("data").get("after")
+        children = response.json().get("data").get("children")
+        for child in children:
+            title_words_lower = child.get("data").get(
+                "title").lower().split(" ")
             for word in word_list:
-                if word.lower() in title_words:
-                    word_count[word.lower()] += 1
-
+                word_count[word.lower()] += title_words_lower.count(
+                    word.lower())
         count_words(subreddit, word_list, word_count, after)
     else:
-        print("Error: Request failed with status code", response.status_code)
-        return
-
+        return None
 
 
 
