@@ -1,4 +1,10 @@
 #!/usr/bin/python3
+"""
+calculate how many square units of water 
+will be retained after it rains.
+"""
+
+
 def rain(walls):
     """
     Return: Integer indicating total amount of rainwater retained.
