@@ -1,112 +1,103 @@
-#include <stdlib.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "binary_trees.h"
 
+
 /**
- * swap - .....
- * @node1: .....
- * @node2: .....
- */
-void swap(heap_t *node1, heap_t *node2)
+ * sort - ....
+ * @tmp: ....
+ * Return: ....
+ **/
+heap_t *sort(heap_t *tmp)
 {
-    int tmp = node1->n;
-    node1->n = node2->n;
-    node2->n = tmp;
+	int n;
+
+	while (tmp->left || tmp->right)
+	{
+		if (!tmp->right || tmp->left->n > tmp->right->n)
+		{
+			n = tmp->n;
+			tmp->n = tmp->left->n;
+			tmp->left->n = n;
+			tmp = tmp->left;
+		}
+		else if (!tmp->left || tmp->left->n < tmp->right->n)
+		{
+			n = tmp->n;
+			tmp->n = tmp->right->n;
+			tmp->right->n = n;
+			tmp = tmp->right;
+		}
+
+	}
+	return (tmp);
+}
+
+
+/**
+ * preorder - ....
+ * @root: ....
+ * @node: ....
+ * @h: ....
+ * @l: ....
+ **/
+void preorder(heap_t *root, heap_t **node, size_t h, size_t l)
+{
+	if (!root)
+		return;
+	if (h == l)
+		*node = root;
+	l++;
+	if (root->left)
+		preorder(root->left, node, h, l);
+	if (root->right)
+		preorder(root->right, node, h, l);
+}
+
+
+/**
+ * checklen - ....
+ * @tree: ....
+ * Return: ....
+ */
+static size_t checklen(const binary_tree_t *tree)
+{
+	size_t h_left;
+	size_t h_right;
+
+	h_left = tree->left ? 1 + checklen(tree->left) : 0;
+	h_right = tree->right ? 1 + checklen(tree->right) : 0;
+	return (h_left > h_right ? h_left : h_right);
 }
 
 /**
- * heapify_down - .....
- * @root: .....
- */
-void heapify_down(heap_t *root)
-{
-    heap_t *largest = root->left;
-
-    if (root->right && root->right->n > largest->n)
-        largest = root->right;
-
-    if (largest && largest->n > root->n)
-    {
-        swap(root, largest);
-        heapify_down(largest);
-    }
-}
-
-/**
- * get_last_node - .....
- * @root: .....
- *
- * Return: .....
- */
-heap_t *get_last_node(heap_t *root)
-{
-    if (root == NULL)
-        return NULL;
-
-    int size = 0, i;
-    heap_t **queue = malloc(sizeof(heap_t *) * size);
-    heap_t *current = NULL, *last_node = NULL;
-
-    if (queue == NULL)
-        return NULL;
-
-    queue[size++] = root;
-
-    for (i = 0; i < size; i++)
-    {
-        current = queue[i];
-        last_node = current;
-
-        if (current->left)
-            queue = realloc(queue, sizeof(heap_t *) * (++size));
-
-        if (current->left)
-            queue[size - 1] = current->left;
-
-        if (current->right)
-            queue = realloc(queue, sizeof(heap_t *) * (++size));
-
-        if (current->right)
-            queue[size - 1] = current->right;
-    }
-
-    free(queue);
-    return last_node;
-}
-
-/**
- * heap_extract - .....
- * @root: .....
- *
- * Return: .....
+ * heap_extract - ....
+ * @root: ....
+ * Return: ....
  */
 int heap_extract(heap_t **root)
 {
-    if (root == NULL || *root == NULL)
-        return 0;
+	int value;
+	heap_t *tmp, *node;
 
-    int value = (*root)->n;
-    heap_t *last_node = get_last_node(*root);
-
-    if (*root == last_node)
-    {
-        free(*root);
-        *root = NULL;
-        return value;
-    }
-
-    (*root)->n = last_node->n;
-
-    if (last_node->parent->left == last_node)
-        last_node->parent->left = NULL;
-    else
-        last_node->parent->right = NULL;
-
-    free(last_node);
-
-    heapify_down(*root);
-
-    return value;
+	if (!root || !*root)
+		return (0);
+	tmp = *root;
+	value = tmp->n;
+	if (!tmp->left && !tmp->right)
+	{
+		*root = NULL;
+		free(tmp);
+		return (value);
+	}
+	preorder(tmp, &node, checklen(tmp), 0);
+	tmp = sort(tmp);
+	tmp->n = node->n;
+	if (node->parent->right)
+		node->parent->right = NULL;
+	else
+		node->parent->left = NULL;
+	free(node);
+	return (value);
 }
