@@ -12,7 +12,10 @@ def makeChange(coins, total):
     if total == 0:
         return 0
 
-    if total < 0 or len(coins) == 0:
+    if total < 0:
+        return -1
+
+    if len(coins) == 0:
         return -1
 
     min_coins = float('inf')
