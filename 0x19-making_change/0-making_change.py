@@ -14,15 +14,19 @@ def makeChange(coins, total):
 
     if len(coins) == 0:
         return -1
+
     coins = sorted(coins)
-    a = [float('inf')] * (total + 1)
-    a[0] = 0
-    for i in range(total + 1):
+    dp = [float('inf')] * (total + 1)
+    dp[0] = 0
+
+    for i in range(1, total + 1):
         for coin in coins:
             if coin > i:
                 break
-            if a[i - coin] != -1:
-                a[i] = min(a[i - coin] + 1, a[i])
-    if a[total] == float('inf'):
+            if dp[i - coin] != float('inf'):
+                dp[i] = min(dp[i], dp[i - coin] + 1)
+
+    if dp[total] == float('inf'):
         return -1
-    return a[total]
+
+    return dp[total]
