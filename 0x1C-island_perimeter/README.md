@@ -2,6 +2,30 @@
 
 ## Python function named island_perimeter that calculates the perimeter of an island described in a given grid.
 
+
+```
+Jaafar@ubuntu:~/0x1C$ cat 0-main.py
+#!/usr/bin/python3
+"""
+0-main
+"""
+island_perimeter = __import__('0-island_perimeter').island_perimeter
+
+if __name__ == "__main__":
+    grid = [
+        [0, 0, 0, 0, 0, 0],
+        [0, 1, 0, 0, 0, 0],
+        [0, 1, 0, 0, 0, 0],
+        [0, 1, 1, 1, 0, 0],
+        [0, 0, 0, 0, 0, 0]
+    ]
+    print(island_perimeter(grid))
+
+Jaafar@ubuntu:~/0x1C$ 
+Jaafar@ubuntu:~/0x1C$ ./0-main.py
+12
+Jaafar@ubuntu:~/0x1C$
+```
 ### The task requires the following conditions to be met:
 
 * The input grid is a list of lists of integers, where 0 represents water and 1 represents land.
