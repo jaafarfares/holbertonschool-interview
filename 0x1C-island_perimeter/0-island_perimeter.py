@@ -7,6 +7,8 @@ def island_perimeter(grid):
     """
     Implement island traversal
     """
+    if not grid or not any(1 in row for row in grid):
+        return 0
     def dfs(row, col):
         """
         depth first Search DFS or breadth first Search
