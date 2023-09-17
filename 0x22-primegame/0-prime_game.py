@@ -2,6 +2,8 @@
 """
 ...............
 """
+
+
 def is_prime(n):
     """
     ...
@@ -19,6 +21,7 @@ def is_prime(n):
         i += 6
     return True
 
+
 def find_primes(n):
     """
     ....
@@ -29,6 +32,7 @@ def find_primes(n):
         if is_prime(num):
             primes.append(num)
     return primes
+
 
 def isWinner(x, nums):
     """
@@ -53,4 +57,3 @@ def isWinner(x, nums):
         return "Ben"
     else:
         return None
-
