@@ -6,7 +6,7 @@
 
 def is_prime(n):
     """
-    ...
+    ....
     """
     if n <= 1:
         return False
@@ -24,8 +24,7 @@ def is_prime(n):
 
 def find_primes(n):
     """
-    ....
-
+    ...
     """
     primes = []
     for num in range(2, n + 1):
@@ -36,7 +35,14 @@ def find_primes(n):
 
 def isWinner(x, nums):
     """
-    ...
+    Determine the winner of each game round.
+
+    Args:
+    - x (int): The number of rounds.
+    - nums (list): An array of n for each round.
+
+    Returns:
+    - str or None
     """
     maria_wins = 0
     ben_wins = 0
