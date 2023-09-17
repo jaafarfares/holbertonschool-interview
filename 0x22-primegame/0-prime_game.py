@@ -21,7 +21,11 @@ def is_prime(n):
         i += 6
     return True
 
+
 def primeGame(n):
+    """
+    ...
+    """
     if n < 1:
         return None
     if n == 1:
@@ -57,7 +61,11 @@ def primeGame(n):
         return 1
     return 2
 
+
 def isWinner(x, nums):
+    """
+    ...
+    """
     Maria = 0
     Ben = 0
     if x < 1 or x != len(nums):
@@ -73,4 +81,3 @@ def isWinner(x, nums):
     elif Maria > Ben:
         return "Maria"
     return "Ben"
-
