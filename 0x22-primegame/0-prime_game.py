@@ -21,45 +21,56 @@ def is_prime(n):
         i += 6
     return True
 
-
-def find_primes(n):
-    """
-    ...
-    """
-    primes = []
-    for num in range(2, n + 1):
-        if is_prime(num):
-            primes.append(num)
-    return primes
-
+def primeGame(n):
+    if n < 1:
+        return None
+    if n == 1:
+        return 2
+    numbers = list(range(n + 1))
+    player = 1
+    prime = 2
+    primes_used = []
+    for num in numbers:
+        if num % prime == 0:
+            numbers.remove(num)
+    primes_used.append(prime)
+    prime = 3
+    while numbers != [1]:
+        if player == 1:
+            player = 2
+        else:
+            player = 1
+        for num in numbers:
+            if num % prime == 0:
+                numbers.remove(num)
+        primes_used.append(prime)
+        prime += 2
+        flag = 1
+        while flag:
+            for num in primes_used:
+                if prime % num == 0:
+                    prime += 2
+                    break
+            else:
+                flag = 0
+    if player == 1:
+        return 1
+    return 2
 
 def isWinner(x, nums):
-    """
-    Determine the winner of each game round.
-
-    Args:
-    - x (int): The number of rounds.
-    - nums (list): An array of n for each round.
-
-    Returns:
-    - str or None
-    """
-    maria_wins = 0
-    ben_wins = 0
-
-    for n in nums:
-        if n % 2 == 0 or n == 1:
-            ben_wins += 1
-        else:
-            primes = find_primes(n)
-            if len(primes) % 2 == 0:
-                ben_wins += 1
-            else:
-                maria_wins += 1
-
-    if maria_wins > ben_wins:
-        return "Maria"
-    elif ben_wins > maria_wins:
-        return "Ben"
-    else:
+    Maria = 0
+    Ben = 0
+    if x < 1 or x != len(nums):
         return None
+    for n in nums:
+        winner = primeGame(n)
+        if winner == 1:
+            Maria += 1
+        elif winner == 2:
+            Ben += 1
+    if Maria == Ben:
+        return None
+    elif Maria > Ben:
+        return "Maria"
+    return "Ben"
+
