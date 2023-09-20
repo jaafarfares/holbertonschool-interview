@@ -1,90 +1,103 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "holberton.h"
 
 /**
- * is_positive_integer - checks if a string is a positive integer.
- * @str: the string to check.
- * Return: 1 if it's a positive integer, 0 otherwise.
+ * _puts - ....
+ * @s: ...
+ * Return: ....
  */
-int is_positive_integer(char *str)
+void _puts(char *s)
 {
-	while (*str)
+	if (*s != '\0')
 	{
-		if (*str < '0' || *str > '9')
-			return (0);
-
-		str++;
+		_putchar(*s);
+		puts(s + 1);
 	}
-	return (1);
 }
-
 /**
- * multiply - multiplies two positive integers represented as strings.
- * @num1: the first number.
- * @num2: the second number.
+ * err_message - ....
+ * @s: ....
+ * Return: ....
  */
-void multiply(char *num1, char *num2)
+void err_message(char *s)
 {
+	_puts(s);
+	exit(98);
+}
+/**
+ * _isdigit - ......
+ * @s: .....
+ * Return: ....
+ */
+int _isdigit(char *s)
+{
+	int i, digit = 0;
 
+	for (i = 0; s[i] && !digit; i++)
+	{
+		if (s[i] < '0' || s[i] > '9')
+			digit++;
+	}
+	return (digit);
+}
+/**
+ * operations - ...
+ * @num1: ......
+ * @num2: .....
+ * @len1: ....
+ * @len2: ...
+ * Return: ....
+ */
+char *operations(char *num1, char *num2, int len1, int len2)
+{
+	char *result = NULL;
+	int i, j, carry, len_total = (len1 + len2);
+
+	result = malloc(sizeof(char) * len_total);
+	if (!result)
+		err_message("Error");
+	for (i = 0; i < len_total; i++)
+		result[i] = '0';
+	for (i = len1 - 1; i >= 0; i--)
+	{
+		carry = 0;
+		for (j = len2 - 1; j >= 0; j--)
+		{
+			carry += (num1[i] - '0') * (num2[j] - '0');
+			carry += result[i + j + 1] - '0';
+			result[i + j + 1] = (carry % 10) + '0';
+			carry /= 10;
+		}
+		if (carry)
+			result[i + j + 1] = (carry % 10) + '0';
+	}
+	return (result);
+}
+/**
+ * main - .....
+ * @av: ......
+ * @ac: ...
+ * Return: ...
+ */
+int main(int ac, char **av)
+{
 	int len1 = 0, len2 = 0;
+	char *num1 = av[1], *num2 = av[2], *result = NULL;
 
-	while (num1[len1]) {
+	if (ac != 3 || _isdigit(num1) || _isdigit(num2))
+		err_message("Error");
+	if (av[1][0] == 48 || av[2][0] == 48)
+		_puts("0"), exit(0);
+
+	while (num1[len1])
 		len1++;
-	}
-	while (num2[len2]) {
+	while (num2[len2])
 		len2++;
-	}
 
-	int *result = calloc(len1 + len2, sizeof(int));
-
-	for (int i = len1 - 1; i >= 0; i--) {
-		for (int j = len2 - 1; j >= 0; j--) {
-			int product = (num1[i] - '0') * (num2[j] - '0');
-			int pos1 = i + j, pos2 = i + j + 1;
-			int sum = product + result[pos2];
-			result[pos1] += sum / 10;
-			result[pos2] = sum % 10;
-		}
-	}
-
-	int printed = 0;
-	for (int i = 0; i < len1 + len2; i++) {
-		if (result[i] || printed) {
-			printf("%d", result[i]);
-			printed = 1;
-		}
-	}
-
-	if (!printed) {
-		printf("0");
-	}
-
-	printf("\n");
-
+	result = operations(num1, num2, len1, len2);
+	if (result[0] == '0')
+		_puts(result + 1);
+	else
+		_puts(result);
 	free(result);
-}
-
-/**
- * main - multiplies two positive numbers.
- * @argc: argument count.
- * @argv: argument vector.
- * Return: 0 if success otherwise 98 and print Error.
- */
-int main(int argc, char *argv[])
-{
-	if (argc != 3 || !is_positive_integer(argv[1]) || !is_positive_integer(argv[2])) {
-		printf("Error\n");
-		return (98);
-	}
-
-	if (argv[1][0] == '0' || argv[2][0] == '0') {
-		printf("0\n");
-		return (0);
-	}
-
-	multiply(argv[1], argv[2]);
-
 	return (0);
 }
-
