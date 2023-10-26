@@ -1,67 +1,52 @@
 #include "sort.h"
-/**
- * swap - ......
- * @a: ......
- * @b: ......
- */
-void swap(int *a, int *b)
-{
-    int temp = *a;
-    *a = *b;
-    *b = temp;
-}
+
 
 /**
- * heap_sort - ......
- * @array: ......
- * @size: ......
+ * heapify - ..........
+ * @array: ..........
+ * @size: ..........
+ * @i: ..........
+ * @total_size: ..........
+ */
+void heapify(int *array, size_t size, size_t i, size_t total_size)
+{
+	size_t largest = i;
+	size_t left = 2 * i + 1;
+	size_t right = 2 * i + 2;
+
+	if (left < size && array[left] > array[largest])
+		largest = left;
+
+	if (right < size && array[right] > array[largest])
+		largest = right;
+
+	if (largest != i)
+	{
+		int temp = array[i];
+		array[i] = array[largest];
+		array[largest] = temp;
+		print_array(array, total_size);
+		heapify(array, size, largest, total_size);
+	}
+}
+
+
+/**
+ * heap_sort - ..........
+ * @array: ..........
+ * @size: ..........
  */
 void heap_sort(int *array, size_t size)
 {
-    if (array == NULL || size <= 1) {
-        return;
-    }
+	for (int i = size / 2 - 1; i >= 0; i--)
+		heapify(array, size, i, size);
 
-    int i, a;
-
-    a = (int)size - 1;
-    for (a = (int)size - 1; a > 0; a--) {
-        for (i = a; i >= 0; i--) {
-            heapify(array, (int)size, i, a);
-        }
-        swap(&array[0], &array[a]);
-        print_array((const int *)array, size);
-    }
+	for (int i = size - 1; i > 0; i--)
+	{
+		int temp = array[0];
+		array[0] = array[i];
+		array[i] = temp;
+		print_array(array, size);
+		heapify(array, i, 0, size);
+	}
 }
-
-/**
- * heapify - ......
- * @array: ......
- * @size: ......
- * @parent: ......
- * @a: ......
- */
-void heapify(int *array, int size, int parent, int a)
-{
-    int l, r;
-
-    l = (parent * 2) + 1;
-    r = (parent * 2) + 2;
-    if (parent < 0 || parent >= size - 1) {
-        return;
-    }
-    if (r <= a &&
-        (array[r] >= array[l] && array[r] > array[parent])) {
-        swap(&array[parent], &array[r]);
-        print_array((const int *)array, (size_t)size);
-        heapify(array, size, r, a);
-    }
-    if ((l <= a &&
-         (r > a || array[l] > array[r])) &&
-        array[l] > array[parent]) {
-        swap(&array[parent], &array[l]);
-        print_array((const int *)array, (size_t)size);
-        heapify(array, size, l, a);
-    }
-}
-
