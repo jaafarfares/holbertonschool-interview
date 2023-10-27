@@ -8,46 +8,25 @@
  */
 void menger(int level)
 {
-	if (level < 0)
-		return;
+	int i, j, n, row_idx, col_idx, symbol;
 
-	int size = pow(3, level);
-
-	for (int i = 0; i < size; i++)
+	n = pow(3, level); 
+	for (i = 0; i < n; i++) 
 	{
-		for (int j = 0; j < size; j++)
+		for (j = 0; j < n; j++)
 		{
-			drawMenger(size, level, i, j);
+			symbol = '#';
+			row_idx = i;
+			col_idx = j; 
+			while (row_idx || col_idx)
+			{
+				if (row_idx % 3 == 1 && col_idx % 3 == 1) 
+					symbol = ' ';
+				row_idx /= 3;
+				col_idx /= 3;
+			}
+			putchar(symbol); 
 		}
-		printf("\n");
-	}
-}
-
-/**
- * drawMenger - ............
- * @size: ............
- * @level: ............
- * @x: ............
- * @y: ............
- */
-void drawMenger(int size, int level, int x, int y)
-{
-	if (level == 0)
-	{
-		printf("#");
-	}
-	else
-	{
-		int step = size / 3;
-		int center = size / 3;
-
-		if (x >= center && x < center * 2 && y >= center && y < center * 2)
-		{
-			printf(" ");
-		}
-		else
-		{
-			drawMenger(step, level - 1, x % center, y % center);
-		}
+		putchar('\n');
 	}
 }
