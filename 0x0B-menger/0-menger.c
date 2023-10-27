@@ -8,24 +8,24 @@
  */
 void menger(int level)
 {
-	int i, j, n, row_idx, col_idx, symbol;
+	int r, c, n, j, i, s;
 
-	n = pow(3, level); 
-	for (i = 0; i < n; i++) 
+	n = pow(3, level);
+	for (i = 0; i < n; i++)
 	{
 		for (j = 0; j < n; j++)
 		{
-			symbol = '#';
-			row_idx = i;
-			col_idx = j; 
-			while (row_idx || col_idx)
+			s = '#';
+			r = i;
+		 c = j;
+			while (r || c)
 			{
-				if (row_idx % 3 == 1 && col_idx % 3 == 1) 
-					symbol = ' ';
-				row_idx /= 3;
-				col_idx /= 3;
+				if (r % 3 == 1 && c % 3 == 1)
+					s = ' ';
+				r /= 3;
+			 c /= 3;
 			}
-			putchar(symbol); 
+			putchar(s);
 		}
 		putchar('\n');
 	}
